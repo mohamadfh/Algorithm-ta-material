@@ -1,27 +1,57 @@
 import os
+import sys
+import os
+import random
+from collections import defaultdict
 
-def replace_man_with_woman_in_files(directory):
-    # Iterate through all files in the directory
+def replace_in_files(directory):
     for filename in os.listdir(directory):
         if filename.endswith(".txt"):
             file_path = os.path.join(directory, filename)
             
-            # Read the content of the file
             with open(file_path, 'r') as file:
-                file_contents = file.read()
+                file_lines = file.readlines()
 
-            # Replace 'man' with 'woman'
-            modified_contents = file_contents.replace('insert', 'push')
-            modified_contents = modified_contents.replace('getMin', 'peek')
-            modified_contents = modified_contents.replace('removeMin', 'pop')
+            result = ""
+
+            """
+            This part should be implemented by yourself to assign the desired content to result variable.
+            result variable's value will rewrite the file content.
+            """
 
 
-            # Write the modified content back to the file
+            """
+            for example in the code below my test cases originally contained representations of trees.
+            where first line contained n (number of vertecies)
+            and n-1 next lines contained u and v (tree had an edge from u to v)
+            and I wanted to randomly connect 2 new vertecies to produce a graph with only 1 cycle
+            """
+
+            # parentadj = defaultdict(lambda: [])
+            # realparent= {}
+            # result = ""
+            # n = int(file_lines[0])
+            # result += str(n) + '\n'
+            # for i in range(1,n):
+            #     uv = file_lines[i]
+            #     result += uv
+            #     uv = uv.split()
+            #     uv = [int(x) for x in uv]
+            #     parentadj[uv[1]].append(uv[0]) 
+            #     parentadj[uv[0]].append(uv[1])
+            # selected = random.randint(1,n)
+            # destination =  random.randint(1,n)
+            # while destination in parentadj[selected] or selected == destination:
+            #     destination =  random.randint(1,n)
+            # result += str(selected) + " " + str(destination)
+
             with open(file_path, 'w') as file:
-                file.write(modified_contents)
+                file.write(result)
 
 if __name__ == "__main__":
-    directory_path = "./in"  # Change this to your directory path
-    replace_man_with_woman_in_files(directory_path)
-    directory_path = "./out"  # Change this to your directory path
-    replace_man_with_woman_in_files(directory_path)
+    if len(sys.argv) < 2:
+        print("Usage: python replacer.py <directory_path>")
+        sys.exit(1) 
+    
+    directory_path = sys.argv[1]
+    replace_in_files(directory_path)

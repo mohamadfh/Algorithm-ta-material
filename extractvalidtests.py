@@ -1,7 +1,7 @@
 
 from bs4 import BeautifulSoup
 import os
-
+import sys
 
 def extract_valid_inputs(address):
     with open(address, 'r',encoding="utf8") as f:
@@ -41,6 +41,12 @@ def save_tests(inputs,outputs):
     for inp in range(len(inputs)):
         with open(f'input{inp}.txt', 'w') as writer:
             writer.write(inputs[inp])
+
 if __name__ == "__main__":
-    ins, outs = extract_valid_inputs("sb.html")
-    save_tests(ins,outs)
+    if len(sys.argv) < 2:
+        print("Usage: python extractvalidtests.py <filename>")
+        sys.exit(1) 
+    
+    filename = sys.argv[1]
+    ins, outs = extract_valid_inputs(filename)
+    save_tests(ins, outs)
